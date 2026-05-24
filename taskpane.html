@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AutorIA Corrector</title>
+    <link rel="stylesheet" href="./taskpane.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="brand">
+        <div>
+          <p class="eyebrow">AUTORIA CORRECTOR</p>
+          <h1>El corrector que no borra tu voz.</h1>
+        </div>
+        <span class="cursor" aria-hidden="true"></span>
+      </header>
+
+      <section class="status" aria-live="polite">
+        <div>
+          <span class="label">Perfil de voz</span>
+          <strong id="voiceState">Esperando documento</strong>
+        </div>
+        <button class="primary" id="scanButton" type="button">Analizar</button>
+      </section>
+
+      <nav class="tabs" aria-label="Modulos de AutorIA">
+        <button class="tab active" data-tab="correction" type="button">Correccion</button>
+        <button class="tab" data-tab="analysis" type="button">Analisis</button>
+        <button class="tab" data-tab="assistant" type="button">Asistente</button>
+        <button class="tab" data-tab="session" type="button">Sesion</button>
+      </nav>
+
+      <section class="summary-grid" aria-label="Resumen del analisis">
+        <article>
+          <span class="label">Oracion promedio</span>
+          <strong id="avgSentence">--</strong>
+        </article>
+        <article>
+          <span class="label">Variacion ritmica</span>
+          <strong id="rhythmScore">--</strong>
+        </article>
+        <article>
+          <span class="label">Palabras nuevas</span>
+          <strong id="sessionWords">0</strong>
+        </article>
+      </section>
+
+      <section class="panel active" id="correction">
+        <div class="panel-head">
+          <h2>Correccion editorial</h2>
+          <button class="secondary" id="protectButton" type="button">No tocar</button>
+        </div>
+        <div class="suggestion-list" id="suggestions"></div>
+      </section>
+
+      <section class="panel" id="analysis">
+        <div class="panel-head">
+          <h2>Ritmo y estructura</h2>
+          <span class="pill" id="toneLabel">Sin lectura</span>
+        </div>
+        <div class="chart-wrap">
+          <canvas id="rhythmCanvas" width="640" height="220" aria-label="Visualizador de ritmo narrativo"></canvas>
+        </div>
+        <div class="heatmap" id="heatmap"></div>
+      </section>
+
+      <section class="panel" id="assistant">
+        <div class="panel-head">
+          <h2>Asistente de escritura</h2>
+          <button class="secondary" id="rewriteButton" type="button">Reformular</button>
+        </div>
+        <label class="field">
+          <span class="label">Fragmento seleccionado o borrador</span>
+          <textarea id="draftInput" rows="6" placeholder="Escribe o pega un parrafo para trabajar manteniendo tu voz."></textarea>
+        </label>
+        <div class="ghost" id="ghostText">Texto fantasma: la continuacion aparecera aqui cuando haya suficiente contexto.</div>
+        <div class="variants" id="variants"></div>
+      </section>
+
+      <section class="panel" id="session">
+        <div class="panel-head">
+          <h2>Sesion de escritura</h2>
+          <button class="secondary" id="resetSessionButton" type="button">Reiniciar</button>
+        </div>
+        <div class="session-grid">
+          <article>
+            <span class="label">Tiempo activo</span>
+            <strong id="activeTime">00:00</strong>
+          </article>
+          <article>
+            <span class="label">Fragmentos editados</span>
+            <strong id="editedBlocks">0</strong>
+          </article>
+        </div>
+        <div class="session-report" id="sessionReport">Cuando cierres la sesion, AutorIA resumira que escribiste hoy sin convertirlo en competencia.</div>
+        <button class="primary wide" id="closeSessionButton" type="button">Resumen al cerrar</button>
+      </section>
+    </main>
+
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+    <script src="./taskpane.js"></script>
+  </body>
+</html>
